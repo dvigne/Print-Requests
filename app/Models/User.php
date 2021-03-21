@@ -70,4 +70,15 @@ class User extends Authenticatable
     {
       return $this->type == "super admin";
     }
+
+    public function defaultProfilePhotoUrl()
+    {
+      $size = 80;
+      $default = "mp";
+      $rating = "x";
+      $url = 'https://www.gravatar.com/avatar/';
+      $url .= md5(strtolower(trim($this->email)));
+      $url .= "?s=$size&d=$default&r=$rating";
+      return $url;
+    }
 }
