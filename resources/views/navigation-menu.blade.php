@@ -19,13 +19,13 @@
 
                 @if(Auth::user()->isAdmin())
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('requests') }}" :active="request()->routeIs('requests')">
+                    <x-jet-nav-link href="{{ route('requests.index') }}" :active="request()->routeIs('requests.index')">
                         {{ __('Requests') }}
                     </x-jet-nav-link>
                 </div>
 
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('history') }}" :active="request()->routeIs('history')">
+                    <x-jet-nav-link href="{{ route('history.index') }}" :active="request()->routeIs('history.index')">
                         {{ __('History') }}
                     </x-jet-nav-link>
                 </div>
@@ -167,20 +167,20 @@
 
         @if(Auth::user()->isAdmin())
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('requests') }}" :active="request()->routeIs('requests')">
+            <x-jet-responsive-nav-link href="{{ route('requests.index') }}" :active="request()->routeIs('.indexrequests')">
                 {{ __('Requests') }}
             </x-jet-responsive-nav-link>
         </div>
 
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('history') }}" :active="request()->routeIs('history')">
+            <x-jet-responsive-nav-link href="{{ route('history.index') }}" :active="request()->routeIs('.indexhistory')">
                 {{ __('History') }}
             </x-jet-responsive-nav-link>
         </div>
 
         @if(Auth::user()->isSuperAdmin())
         <div class="pt-2 pb-3 space-y-1">
-            <x-jet-responsive-nav-link href="{{ route('users') }}" :active="request()->routeIs('users')">
+            <x-jet-responsive-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('.indexusers')">
                 {{ __('User Management') }}
             </x-jet-responsive-nav-link>
         </div>
