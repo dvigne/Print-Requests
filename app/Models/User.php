@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
@@ -18,12 +19,22 @@ class User extends Authenticatable
     use Notifiable;
     use TwoFactorAuthenticatable;
 
+    public $incrementing = false;
+
+    protected static function boot(){
+     parent::boot();
+     static::creating(function ($model) {
+         $model->{$model->getKeyName()} = (string) Str::uuid();
+       });
+     }
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
+        'id',
         'first',
         'last',
         'type',
@@ -80,5 +91,9 @@ class User extends Authenticatable
       $url .= md5(strtolower(trim($this->email)));
       $url .= "?s=$size&d=$default&r=$rating";
       return $url;
+    }
+
+    public function requests() {
+      return $this->hasMany(Requests::class);
     }
 }
