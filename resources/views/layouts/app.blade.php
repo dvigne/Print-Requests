@@ -41,6 +41,8 @@
 
         @stack('modals')
 
+        @stack('scripts')
         @livewireScripts
+        <script src="https://kit.fontawesome.com/5a2061be3e.js" crossorigin="anonymous"></script>
     </body>
 </html>
