@@ -3,18 +3,17 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\User;
 use App\Models\Requests;
 
-class DatabaseSeeder extends Seeder
+class RequestsSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      *
      * @return void
      */
     public function run()
     {
-        User::factory()->count(1)->hasRequests(50)->create();
+        Requests::factory()->count(50)->create();
     }
 }
