@@ -48,5 +48,8 @@
         </x-table.row>
       @endforeach
     </x-table.table>
+    <div class="w-11/12 mx-auto pt-4 pb-4">
+      {{ $requests->links() }}
+    </div>
   </div>
 </x-app-layout>
