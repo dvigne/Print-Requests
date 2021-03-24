@@ -15,8 +15,9 @@ class CreateRequestsTable extends Migration
     {
         Schema::create('requests', function (Blueprint $table) {
             $table->uuid('id');
+            $table->uuid('user_id');
             $table->string('filename');
-            $table->enum('stats', ['printing', 'approved', 'canceled', 'rejected', 'submitted']);
+            $table->enum('status', ['printing', 'approved', 'canceled', 'rejected', 'submitted']);
             $table->timestamps();
             $table->primary('id');
         });
