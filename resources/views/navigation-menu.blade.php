@@ -17,13 +17,13 @@
                     </x-jet-nav-link>
                 </div>
 
-                @if(Auth::user()->isAdmin())
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('requests.index') }}" :active="request()->routeIs('requests.index')">
-                        {{ __('Requests') }}
-                    </x-jet-nav-link>
+                  <x-jet-nav-link href="{{ route('requests.index') }}" :active="request()->routeIs('requests.index')">
+                    {{ __('Requests') }}
+                  </x-jet-nav-link>
                 </div>
-
+                
+                @if(Auth::user()->isAdmin())
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('history.index') }}" :active="request()->routeIs('history.index')">
                         {{ __('History') }}
