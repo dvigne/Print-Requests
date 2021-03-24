@@ -28,10 +28,25 @@
     </x-stats-card>
   </div>
   <div class="grid grid-cols-1 pt-20">
+    <div class="w-11/12 mx-auto">
+      <x-jet-button class="float-right mb-4 bg-blue-500 hover:bg-blue-700">Submit a Request</x-jet-button>
+    </div>
     <x-table.table>
-      <x-table.row :user="Auth::user()" filename="Test" date="Date" request="Request">
-        <x-status.printing />
-      </x-table.row>
+      @foreach($requests as $request)
+        <x-table.row :user="$request->user" filename="{{ $request->filename }}" date="{{ Str::limit($request->created_at, 10, false) }}" request="Request">
+          @if($request->status == 'printing')
+            <x-status.printing />
+          @elseif($request->status == 'approved')
+            <x-status.approved />
+          @elseif($request->status == 'canceled')
+            <x-status.canceled />
+          @elseif($request->status == 'rejected')
+            <x-status.canceled />
+          @elseif($request->status == 'submitted')
+            <x-status.approved />
+          @endif
+        </x-table.row>
+      @endforeach
     </x-table.table>
   </div>
 </x-app-layout>
