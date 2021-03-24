@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Str;
 
 class Requests extends Model
 {
@@ -20,8 +21,9 @@ class Requests extends Model
 
     protected $fillable = [
       "id",
+      'user_id',
       "filename",
-      "stats"
+      "status"
     ];
 
     public function user()
