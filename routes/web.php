@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PrintController;
+use App\Http\Controllers\RequestsController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,8 +20,8 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
-  Route::view('/dashboard', 'dashboard')->name('dashboard');
-  Route::resource('/requests', PrintController::class);
+  Route::get('/dashboard',     [DashboardController::class, 'index'])->name('dashboard');
+  Route::resource('/requests', RequestsController::class);
   Route::resource('/users',    UserController::class);
   Route::resource('/history',  StorageController::class);
 });
