@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Requests;
 use Illuminate\Http\Request;
+use Auth;
 
 class RequestsController extends Controller
 {
@@ -14,7 +15,8 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        return view('requests.requests');
+        $requests = Auth::user()->requests()->paginate(20);
+        return view('requests.requests', ['requests' => $requests]);
     }
 
     /**
