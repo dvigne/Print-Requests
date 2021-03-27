@@ -17,7 +17,7 @@ class CreateRequestsTable extends Migration
             $table->uuid('id');
             $table->uuid('user_id');
             $table->string('filename');
-            $table->enum('status', ['printing', 'approved', 'canceled', 'rejected', 'submitted']);
+            $table->enum('status', ['printing', 'approved', 'canceled', 'rejected', 'submitted'])->default('submitted');
             $table->timestamps();
             $table->primary('id');
         });
