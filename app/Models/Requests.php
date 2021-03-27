@@ -30,6 +30,18 @@ class Requests extends Model
         'created_at' => 'datetime',
     ];
 
+    public function approve()
+    {
+      $this->status = "approved";
+      return $this->save();
+    }
+
+    public function reject()
+    {
+      $this->status = "rejected";
+      return $this->save();
+    }
+
     public function user()
     {
       return $this->belongsTo(User::class);

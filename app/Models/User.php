@@ -10,6 +10,7 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Support\Str;
+use App\Models\Requests;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -91,6 +92,11 @@ class User extends Authenticatable implements MustVerifyEmail
       $url .= md5(strtolower(trim($this->email)));
       $url .= "?s=$size&d=$default&r=$rating";
       return $url;
+    }
+
+    public function needsToReview()
+    {
+      return Requests::where('status', 'submitted')->exists();
     }
 
     public function requests() {
