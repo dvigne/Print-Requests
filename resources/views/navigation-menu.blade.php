@@ -16,13 +16,20 @@
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
                 </div>
-
+                @if(Auth::check() && Auth::user()->hasVerifiedEmail())
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                  <x-jet-nav-link href="{{ route('requests.index') }}" :active="request()->routeIs('requests.index')">
-                    {{ __('Requests') }}
-                  </x-jet-nav-link>
+                    <x-jet-nav-link href="{{ route('requests.index') }}" :active="request()->routeIs('requests.index')">
+                      {{ __('Requests') }}
+                      <!-- <span class="animate-ping inline-flex mb-3 ml-1 h-2 w-2 rounded-full bg-blue-400 opacity-75"></span> -->
+                      @if(Auth::user()->isAdmin() && Auth::user()->needsToReview())
+                        <span class="flex mb-2 ml-1 h-2 w-2">
+                          <span class="animate-ping absolute inline-flex h-2 w-2 rounded-full bg-blue-400 opacity-75"></span>
+                          <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                        </span>
+                      @endif
+                    </x-jet-nav-link>
                 </div>
-                
+
                 @if(Auth::user()->isAdmin())
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('history.index') }}" :active="request()->routeIs('history.index')">
@@ -36,6 +43,7 @@
                         {{ __('User Management') }}
                     </x-jet-nav-link>
                 </div>
+                @endif
                 @endif
                 @endif
             </div>
@@ -92,7 +100,8 @@
                 @endif
 
                 <!-- Settings Dropdown -->
-                <div class="ml-3 relative">
+                  @if(Auth::check())
+                  <div class="ml-3 relative">
                     <x-jet-dropdown align="right" width="48">
                         <x-slot name="trigger">
                             @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
@@ -142,7 +151,22 @@
                             </form>
                         </x-slot>
                     </x-jet-dropdown>
-                </div>
+                  </div>
+                  @else
+                  <div class="flex">
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                      <x-jet-nav-link href="{{ route('login') }}">
+                        {{ __('Login') }}
+                      </x-jet-nav-link>
+                    </div>
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                      <x-jet-nav-link href="{{ route('register') }}">
+                        {{ __('Register') }}
+                      </x-jet-nav-link>
+                    </div>
+                  </div>
+                  @endif
+
             </div>
 
             <!-- Hamburger -->
@@ -164,7 +188,7 @@
                 {{ __('Dashboard') }}
             </x-jet-responsive-nav-link>
         </div>
-
+        @if(Auth::check() && Auth::user()->hasVerifiedEmail())
         @if(Auth::user()->isAdmin())
         <div class="pt-2 pb-3 space-y-1">
             <x-jet-responsive-nav-link href="{{ route('requests.index') }}" :active="request()->routeIs('.indexrequests')">
@@ -186,9 +210,10 @@
         </div>
         @endif
         @endif
-
+        @endif
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
+          @if(Auth::check())
             <div class="flex items-center px-4">
                 @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
                     <div class="flex-shrink-0 mr-3">
@@ -256,6 +281,7 @@
                     @endforeach
                 @endif
             </div>
+            @endif
         </div>
     </div>
 </nav>

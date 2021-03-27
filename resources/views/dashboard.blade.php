@@ -1,4 +1,11 @@
 <x-app-layout>
+  @if(Auth::check() && !Auth::user()->hasVerifiedEmail())
+    <div class="flex w-6/12 rounded-xl text-white mx-auto m-4 h-16 bg-blue-500">
+      <div class="flex-grow border text-center">
+        <h2 class="mt-4 font-bold text-lg">Please <a class="underline" href="{{ route('verification.notice') }}">verify your email</a> in order to submit print requests</h2>
+      </div>
+    </div>
+  @endif
   <div class="grid grid-cols-3 pt-5">
     @if($printerStatus['state']['flags']['ready'])
       <x-stats-card title="Printer Status" subtitle="Ready" color="bg-green-500">
@@ -33,19 +40,7 @@
     </div>
     <x-table.table>
       @foreach($requests as $request)
-        <x-table.row :user="$request->user" filename="{{ $request->filename }}" date="{{ Str::limit($request->created_at, 10, false) }}" request="Request">
-          @if($request->status == 'printing')
-            <x-status.printing />
-          @elseif($request->status == 'approved')
-            <x-status.approved />
-          @elseif($request->status == 'canceled')
-            <x-status.canceled />
-          @elseif($request->status == 'rejected')
-            <x-status.canceled />
-          @elseif($request->status == 'submitted')
-            <x-status.approved />
-          @endif
-        </x-table.row>
+        <livewire:table.row :request="$request"/>
       @endforeach
     </x-table.table>
     <div class="w-11/12 mx-auto pt-4 pb-4">
