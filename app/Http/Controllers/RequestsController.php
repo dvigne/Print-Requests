@@ -15,7 +15,12 @@ class RequestsController extends Controller
      */
     public function index()
     {
-        $requests = Auth::user()->requests()->paginate(20);
+        if (Auth::user()->isAdmin()) {
+          $requests = Requests::latest()->paginate(15);
+        }
+        else {
+          $requests = Auth::user()->requests()->latest()->paginate(20);
+        }
         return view('requests.requests', ['requests' => $requests]);
     }
 
@@ -26,7 +31,7 @@ class RequestsController extends Controller
      */
     public function create()
     {
-        //
+        return view('requests.request-form');
     }
 
     /**
