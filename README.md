@@ -22,6 +22,8 @@ Generate a new seed for password salting and session keys
 php artisan key:generate
 ```
 Fill out the required environment variables by editing the new `.env` file. The key sections below are a good start.
+
+Feel free to change `DB_CONNECTION` from its default `sqlite` to another connection type, like `mysql` for mysql server, shown in the [Documentation](https://laravel.com/docs/8.x/database#configuration) or the [Configuration File](https://github.com/dvigne/Print-Requests/blob/489acfc397d5d315c05fc4fa14436b47f435cd55/config/database.php#L36).
 ```
 # App URL and name to use for links and buttons
 APP_NAME="Print Requests"
@@ -38,7 +40,6 @@ DB_PASSWORD=
 # Octoprint API Server and API Key
 OCTOPRINT_URL="http://0.0.0.0:5000"
 OCTOPRINT_API_KEY="SOMEKEY"
-
 
 # Mail Server Settings
 MAIL_MAILER=smtp
