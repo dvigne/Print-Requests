@@ -1,4 +1,5 @@
 # Print Requests
+[![Build Status](https://ci.dvigne.net/job/Print%20Requests/job/master/badge/icon?style=flat-square)](https://ci.dvigne.net/job/Print%20Requests/job/master/)
 ## About
 Print Requests is a web application built on top of Laravel, Jetstream, and TailwindsCSS created to help traiage 3D print requests. It works by hooking into an Octoprint connected 3D printer and utilizing the REST API served through [OctoPrint Web](https://docs.octoprint.org/en/master/api/index.html).
 
