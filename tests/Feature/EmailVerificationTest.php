@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Laravel\Fortify\Features;
 use Tests\TestCase;
-
+use Str;
 class EmailVerificationTest extends TestCase
 {
     use RefreshDatabase;
@@ -39,6 +39,7 @@ class EmailVerificationTest extends TestCase
         Event::fake();
 
         $user = User::factory()->create([
+            'id' => Str::uuid(),
             'email_verified_at' => null,
         ]);
 

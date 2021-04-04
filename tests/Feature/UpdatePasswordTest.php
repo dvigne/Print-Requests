@@ -19,7 +19,7 @@ class UpdatePasswordTest extends TestCase
 
         Livewire::test(UpdatePasswordForm::class)
                 ->set('state', [
-                    'current_password' => 'password',
+                    'current_password' => 'P@ssw0rd',
                     'password' => 'new-password',
                     'password_confirmation' => 'new-password',
                 ])
@@ -41,7 +41,7 @@ class UpdatePasswordTest extends TestCase
                 ->call('updatePassword')
                 ->assertHasErrors(['current_password']);
 
-        $this->assertTrue(Hash::check('password', $user->fresh()->password));
+        $this->assertTrue(Hash::check('P@ssw0rd', $user->fresh()->password));
     }
 
     public function test_new_passwords_must_match()
@@ -57,6 +57,6 @@ class UpdatePasswordTest extends TestCase
                 ->call('updatePassword')
                 ->assertHasErrors(['password']);
 
-        $this->assertTrue(Hash::check('password', $user->fresh()->password));
+        $this->assertTrue(Hash::check('P@ssw0rd', $user->fresh()->password));
     }
 }
