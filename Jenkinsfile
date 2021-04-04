@@ -27,7 +27,8 @@ pipeline {
         }
       }
       steps {
-        withCredentials([string(credentialsId: 'e78d2ba7-1687-444a-88cf-1f786bdf512f', variable: 'OCTOPRINT_URL'), string(credentialsId: '91e37824-b17e-4b68-b6d4-55504af9eaa8', variable: 'OCTOPRINT_API_KEY')]) {
+        sh 'touch print.db'
+        withCredentials([string(credentialsId: 'octoprint_url', variable: 'OCTOPRINT_URL'), string(credentialsId: 'octoprint_api_key', variable: 'OCTOPRINT_API_KEY')]) {
           sh './vendor/bin/phpunit'
         }
       }
