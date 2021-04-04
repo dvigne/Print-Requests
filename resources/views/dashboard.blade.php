@@ -36,7 +36,7 @@
   </div>
   <div class="grid grid-cols-1 pt-20">
     <div class="w-11/12 mx-auto">
-      <x-jet-button class="float-right mb-4 bg-blue-500 hover:bg-blue-700">Submit a Request</x-jet-button>
+      <a href="{{ route('requests.create' )}}"><x-jet-button class="float-right mb-4 bg-blue-500 hover:bg-blue-700">Submit a Request</x-jet-button></a>
     </div>
     <x-table.table>
       @foreach($requests as $request)
